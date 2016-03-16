@@ -1,0 +1,2 @@
+parameters:
+    memcache.client.class: mCzolko\MemcachedBundle\Client\MemcachedClient

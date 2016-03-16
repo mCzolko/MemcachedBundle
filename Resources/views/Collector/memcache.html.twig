@@ -1,0 +1,69 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img width="20" height="28" alt="Memcache" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAYAAAC4JqlRAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYcFiU0a9/iTQAABA9JREFUWMPtVl1II1cUPncmySSaCCZFgxCzpW0MS4MlyiqD0dgxjaEUYaOCQugaBUsRxSglJbBBMduKRdtUELHUSKHERV+iPoqbIJQVLBbqdrWIC11/iO0aq5huMpnbh+4EW1M3UehL/R7Pdw7nO9+5984AXOMa/3skEgmwWCwpudXV1XMxh8ORMtfpdF5OgEqlAgCAzs5OqdlsLq+srDTZ7fYbPN/T03OuBmMMVqtVbTAYTCaTiQ6FQmKe8/l8mYvAGENNTc0dmqafl5eX46qqqod1dXXtu7u72XzO2NhYMr+pqamAYZiFsrIyTNP0KcMwE62trWU839zcDCzLptUbAQAwDCOMRCL3OI7rRQgBxhhEIlE8KytrSafT3fN6vcGzRWaz+a3j4+OFaDRaAABAEASIxeInCoXiW7fb/UlJSclJusMTAACHh4eAMeYQQn+pQgji8bjw6OjonZWVlbnGxsbPMcYivohlWcxxXAIhBLzgaDR6Y2dnx9nb2/udw+F4m89dXFx8uYCLEIvFZJubm10mk2nL6XRWAgCQJEkQBEGmWCURiUTeXF5eXmxoaJgIBALZDMMk+dHR0dQr0Ov1QgAYAICPLjonAoEACgsLvwaAub29vYloNPoK79o/wXEc5ObmPlOr1R8AwILP5zu9lANJpQhBIpGA7e1tezgcvs+ybPa/NefPRSQSka+vr9/f39//xmaz0TzncrkyF3AWJycnQpZlJemKPjg4uL21tTVjsVg+nZ6elns8HmhpaclsBVfFixVyFEU91uv1Nq/X+/2lHbgMXrhBnJ6e3lxbW+u60gquYoRUKv3FYDAM/KcCEEIgFAqfFRQUfBkMBl/zeDw/d3R0ZC4AYwwAABKJ5IgkyT/S3Dvk5OTMabVa6/z8fBdCKD4+Pp58E9IWwHEciMViUCqV4wqFokckEp3wglI1xhiDXC5/olQq7Uaj8f2pqakHAADd3d3Q3t6ezBWkO3VeXt5P+fn5H2q12ofBYPB1jHEs1TvAcRxIJBJQKpWfURT1hd/vfxoIBAAAYGNjA4qKitJ/iDDGIBaLWY1GM6DT6W5ZrdYHLpcrmkgkCI7jEqlq5HL5j8XFxWXV1dVOv9//FACgr68PAOBc86QDFEVBLBaDs5aSJBmTSqU/lJaWdgwNDa2cdYMkSSAI4m+HjCTJX1Uq1VczMzN3EULxs03cbvfFH6PJyUlWJpNtCwSC3wmCiIpEokdqtfru0tLSLb55KBSC4eFhfsoIRVGPEULPSZL8TSaTzRmNRvPs7OzHCKF4Rn9H9fX1AAAwODiYbTab362oqLA7nc5Xeb6/vz9lnc1me4Om6Tu1tbXv8TGNRgPhcDjze2qz2c7F2traUuaOjIxkFL/GNa7xMvwJ4WuVPrHMR8YAAAAASUVORK5CYII=" />
+        <span class="sf-toolbar-status">{{ collector.totals.calls }}</span>
+
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Memcache Calls</b>
+            <span>{{ collector.totals.calls }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Total time</b>
+            <span>{{ '%0.2f'|format(collector.totals.time * 1000) }} ms</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Cache hits</b>
+            <span>{{ collector.totals.hits }}/{{ collector.totals.reads }} ({{ collector.totals.ratio }}%)</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Cache writes</b>
+            <span>{{ collector.totals.writes }}</span>
+        </div>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+    <span class="icon">
+        <img width="32" height="33" alt="Memcache" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAYAAAC4JqlRAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYcFiU0a9/iTQAABA9JREFUWMPtVl1II1cUPncmySSaCCZFgxCzpW0MS4MlyiqD0dgxjaEUYaOCQugaBUsRxSglJbBBMduKRdtUELHUSKHERV+iPoqbIJQVLBbqdrWIC11/iO0aq5huMpnbh+4EW1M3UehL/R7Pdw7nO9+5984AXOMa/3skEgmwWCwpudXV1XMxh8ORMtfpdF5OgEqlAgCAzs5OqdlsLq+srDTZ7fYbPN/T03OuBmMMVqtVbTAYTCaTiQ6FQmKe8/l8mYvAGENNTc0dmqafl5eX46qqqod1dXXtu7u72XzO2NhYMr+pqamAYZiFsrIyTNP0KcMwE62trWU839zcDCzLptUbAQAwDCOMRCL3OI7rRQgBxhhEIlE8KytrSafT3fN6vcGzRWaz+a3j4+OFaDRaAABAEASIxeInCoXiW7fb/UlJSclJusMTAACHh4eAMeYQQn+pQgji8bjw6OjonZWVlbnGxsbPMcYivohlWcxxXAIhBLzgaDR6Y2dnx9nb2/udw+F4m89dXFx8uYCLEIvFZJubm10mk2nL6XRWAgCQJEkQBEGmWCURiUTeXF5eXmxoaJgIBALZDMMk+dHR0dQr0Ov1QgAYAICPLjonAoEACgsLvwaAub29vYloNPoK79o/wXEc5ObmPlOr1R8AwILP5zu9lANJpQhBIpGA7e1tezgcvs+ybPa/NefPRSQSka+vr9/f39//xmaz0TzncrkyF3AWJycnQpZlJemKPjg4uL21tTVjsVg+nZ6elns8HmhpaclsBVfFixVyFEU91uv1Nq/X+/2lHbgMXrhBnJ6e3lxbW+u60gquYoRUKv3FYDAM/KcCEEIgFAqfFRQUfBkMBl/zeDw/d3R0ZC4AYwwAABKJ5IgkyT/S3Dvk5OTMabVa6/z8fBdCKD4+Pp58E9IWwHEciMViUCqV4wqFokckEp3wglI1xhiDXC5/olQq7Uaj8f2pqakHAADd3d3Q3t6ezBWkO3VeXt5P+fn5H2q12ofBYPB1jHEs1TvAcRxIJBJQKpWfURT1hd/vfxoIBAAAYGNjA4qKitJ/iDDGIBaLWY1GM6DT6W5ZrdYHLpcrmkgkCI7jEqlq5HL5j8XFxWXV1dVOv9//FACgr68PAOBc86QDFEVBLBaDs5aSJBmTSqU/lJaWdgwNDa2cdYMkSSAI4m+HjCTJX1Uq1VczMzN3EULxs03cbvfFH6PJyUlWJpNtCwSC3wmCiIpEokdqtfru0tLSLb55KBSC4eFhfsoIRVGPEULPSZL8TSaTzRmNRvPs7OzHCKF4Rn9H9fX1AAAwODiYbTab362oqLA7nc5Xeb6/vz9lnc1me4Om6Tu1tbXv8TGNRgPhcDjze2qz2c7F2traUuaOjIxkFL/GNa7xMvwJ4WuVPrHMR8YAAAAASUVORK5CYII=" />
+    </span>
+    <strong>Memcache</strong>
+    <span class="count">
+        <span>{{ collector.totals.calls }}</span>
+        <span>{{ '%0.2f'|format(collector.totals.time * 1000) }} ms</span>
+    </span>
+</span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Memcache</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Key</th>
+                <th>Result</th>
+                <th>Time</th>
+                <th>Arguments</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key, call in collector.calls %}
+            <tr>
+                <th>{{ call.action }}</th>
+                <td>{{ call.args.key }}</td>
+                <td>{{ collector.getResult(key) }}</td>
+                <td>{{ '%0.2f'|format(call.time * 1000) }} ms</td>
+                <td>{{ collector.getArguments(key) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

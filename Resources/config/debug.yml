@@ -1,0 +1,10 @@
+parameters:
+    memcache.data_collector.class: mCzolko\MemcachedBundle\DataCollector\MemcacheDataCollector
+    memcache.data_collector.template: "mCzolkoMemcachedBundle:Collector:memcache"
+    memcache.client.class: mCzolko\MemcachedBundle\Client\LoggedMemcachedClient
+
+services:
+    memcache.data_collector:
+        class: %memcache.data_collector.class%
+        tags:
+            - { name: data_collector, template: %memcache.data_collector.template%, id:"memcache"}

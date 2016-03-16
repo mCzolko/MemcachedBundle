@@ -1,0 +1,3 @@
+services:
+    memcached.client:
+        class: %memcache.client.class%
